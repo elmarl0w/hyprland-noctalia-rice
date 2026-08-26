@@ -121,6 +121,7 @@ community_ids = [ "neovim", "vscode", "obsidian", "opencode", "micro", "bat", "f
 | `Super + Z` | настройки Noctalia |
 | `Super + L` | заблокировать экран |
 | `Super + Tab` | переключатель окон |
+| `Ctrl + Space` | сменить раскладку |
 | `Print` | скриншот области |
 
 ## RGB-подсветка
