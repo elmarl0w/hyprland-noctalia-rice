@@ -305,7 +305,9 @@ memory_poll_seconds = 2
 colors_changed = [ "__HOME__/.local/bin/noctalia-rgb-sync" ]
 
 [location]
-auto_locate = true
+# автоопределение по IP выдавало город VPN-выхода, а не реальный
+auto_locate = false
+address = "__CITY__"
 
 [control_center]
 # 700 по умолчанию мало: русские подписи кнопок не влезают

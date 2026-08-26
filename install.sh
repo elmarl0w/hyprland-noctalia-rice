@@ -27,7 +27,10 @@ cp -a "$SRC/hypr/config/." "$CFG/hypr/config/"
 
 c "Noctalia"
 mkdir -p "$CFG/noctalia/palettes" "$WALLPAPERS"
-sed -e "s|__HOME__|$HOME|g" -e "s|__WALLPAPERS__|$WALLPAPERS|g" \
+# город для погоды: автоопределение по IP врёт при включённом VPN
+read -r -p "Город для виджета погоды [Moscow, Russia]: " CITY
+[ -z "$CITY" ] && CITY="Moscow, Russia"
+sed -e "s|__HOME__|$HOME|g" -e "s|__WALLPAPERS__|$WALLPAPERS|g" -e "s|__CITY__|$CITY|g" \
     "$SRC/noctalia/config.toml" > "$CFG/noctalia/config.toml"
 cp -a "$SRC/noctalia/palettes/." "$CFG/noctalia/palettes/"
 
