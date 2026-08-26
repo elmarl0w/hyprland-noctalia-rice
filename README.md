@@ -115,13 +115,13 @@ community_ids = [ "neovim", "vscode", "obsidian", "opencode", "micro", "bat", "f
 | | |
 |---|---|
 | `Super + Shift + W` | панель обоев |
-| `Super + Space` | лаунчер |
+| `Alt + Space` | лаунчер |
 | `Super + Return` / `Ctrl + Alt + T` | терминал |
 | `Super + X` | центр управления |
 | `Super + Z` | настройки Noctalia |
 | `Super + L` | заблокировать экран |
 | `Super + Tab` | переключатель окон |
-| `Ctrl + Space` | сменить раскладку |
+| `Super + Space` | сменить раскладку |
 | `Print` | скриншот области |
 
 ## RGB-подсветка
