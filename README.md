@@ -116,6 +116,7 @@ community_ids = [ "neovim", "vscode", "obsidian", "opencode", "micro", "bat", "f
 |---|---|
 | `Super + Shift + W` | панель обоев |
 | `Super + Space` | лаунчер |
+| `Super + Return` / `Ctrl + Alt + T` | терминал |
 | `Super + X` | центр управления |
 | `Super + Z` | настройки Noctalia |
 | `Super + L` | заблокировать экран |
