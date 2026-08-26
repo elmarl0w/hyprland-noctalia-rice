@@ -1,0 +1,6 @@
+# сгенерированное Noctalia — не версионируем
+noctalia.lua
+matugen.lua
+themes/noctalia.conf
+*.bak
+*.bak-rename

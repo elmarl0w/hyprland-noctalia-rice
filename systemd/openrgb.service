@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenRGB server (RGB: клавиатура, материнка, RAM, GPU)
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/openrgb --server --server-port 6742
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=120
+
+[Install]
+WantedBy=default.target

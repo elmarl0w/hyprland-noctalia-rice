@@ -1,0 +1,63 @@
+#!/bin/bash
+# Синхронизация RGB-подсветки с палитрой Noctalia.
+# Хук colors_changed: сменил обои -> железо перекрасилось.
+#
+# Выключить синхронизацию (чтобы держать свой цвет из GUI):
+#     touch ~/.config/rgb-sync.off
+# Включить обратно:
+#     rm ~/.config/rgb-sync.off
+#
+# Лог: /tmp/rgb-sync.log
+set -uo pipefail
+
+LOG=/tmp/rgb-sync.log
+PORT=6742
+log(){ printf '%s %s\n' "$(date +%T)" "$*" >> "$LOG"; }
+trim(){ [ -f "$LOG" ] && { tail -n 50 "$LOG" > "$LOG.tmp" && mv -f "$LOG.tmp" "$LOG"; }; }
+
+# ── выключатель ────────────────────────────────────────────────
+if [ -f "$HOME/.config/rgb-sync.off" ]; then
+  log "пропуск: синхронизация выключена (~/.config/rgb-sync.off)"; trim; exit 0
+fi
+
+# ── текущий акцент палитры ─────────────────────────────────────
+SRC="$HOME/.config/hypr/noctalia.lua"
+[ -f "$SRC" ] || { log "нет $SRC"; trim; exit 0; }
+HEX=$(grep -m1 '^local primary' "$SRC" | grep -oiE '[0-9a-f]{6}' | head -1)
+[ -n "${HEX:-}" ] || { log "не разобрал цвет"; trim; exit 0; }
+
+# ── 1. OpenRGB через сервер: всё железо разом, ~1 сек ───────────
+if timeout 15 openrgb --client "127.0.0.1:$PORT" --mode direct --color "$HEX" >/dev/null 2>&1; then
+  log "#$HEX -> openrgb ok (все устройства)"
+  trim; exit 0
+fi
+
+log "#$HEX -> сервер openrgb недоступен, откат на openrazer"
+
+# ── 2. Откат: только Razer, напрямую через демон ────────────────
+if python3 -c 'import openrazer.client' 2>/dev/null; then
+  RES=$(python3 - "$HEX" 2>&1 <<'PY'
+import sys
+h = sys.argv[1]
+r, g, b = int(h[0:2],16), int(h[2:4],16), int(h[4:6],16)
+try:
+    from openrazer.client import DeviceManager
+    devs = DeviceManager().devices
+    if not devs: print("устройств нет"); sys.exit(0)
+    for d in devs:
+        try:
+            if d.has("lighting_static"):
+                d.fx.static(r,g,b); print("ok:"+d.name)
+            else:
+                print("без static:"+d.name)
+        except Exception as e:
+            print("сбой %s: %s" % (d.name, e))
+except Exception as e:
+    print("демон недоступен: %s" % e)
+PY
+)
+  log "  openrazer: $(echo "$RES" | tr '\n' ' ')"
+fi
+
+trim
+exit 0

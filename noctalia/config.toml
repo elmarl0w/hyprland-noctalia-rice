@@ -1,0 +1,355 @@
+# ─────────────────────────────────────────────────────────────
+#  Noctalia — CachyOS Green rice
+#  Бэкап прежнего конфига: ~/config-backup-*/noctalia/config.toml
+# ─────────────────────────────────────────────────────────────
+
+[accessibility]
+ui_scale = 1.20
+
+# ── Бар ──────────────────────────────────────────────────────
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+    enabled = true
+    position = "top"
+    thickness = 38
+    scale = 1.05
+    padding = 14
+    widget_spacing = 6
+    background_opacity = 0.92
+    capsule = true
+    capsule_fill = "surface_variant"
+    capsule_opacity = 0.95
+    capsule_padding = 9.0
+    capsule_thickness = 0.82
+    layer = "top"
+    reserve_space = true
+    font_weight = 600
+    hover_highlight = true
+    shadow = true
+    contact_shadow = true
+    concave_edge_corners = true
+    border = "outline"
+    border_width = 0.0
+    margin_edge = 0
+    margin_ends = 0
+    radius_top_left = 0
+    radius_top_right = 0
+    radius_bottom_left = 16
+    radius_bottom_right = 16
+
+    # слева: лаунчер · воркспейсы · раскладка · активное окно
+    start  = [ "launcher", "workspaces", "keyboard_layout", "lock_keys", "active_window" ]
+    # по центру: часы
+    center = [ "weather", "clock" ]
+    # справа: медиа · системные метрики · трей · уведомления · сеть · звук · питание
+    end    = [ "media", "group:sys", "tray", "notifications", "network", "volume", "session" ]
+
+        [[bar.default.capsule_group]]
+        id = "sys"
+        enabled = true
+        fill = "surface_variant"
+        members = [ "sys_cpu", "sys_temp", "sys_gpu", "sys_ram", "sys_disk" ]
+        opacity = 1.0
+        padding = 6.0
+        border = ""
+
+# ── Виджеты бара ─────────────────────────────────────────────
+[widget.launcher]
+type = "launcher"
+color = "primary"
+
+[widget.workspaces]
+type = "workspaces"
+capsule = true
+capsule_fill = "on_primary"
+show_labels = true
+active_pill_size = 3.4
+inactive_pill_size = 1.0
+pill_scale = 1.0
+
+[widget.lock_keys]
+type = "lock_keys"
+display = "short"
+hide_when_off = true
+color = "error"
+
+[widget.keyboard_layout]
+type = "keyboard_layout"
+hide_when_single_layout = false
+color = "tertiary"
+
+[widget.active_window]
+type = "active_window"
+icon_size = 15.0
+min_length = 0.0
+max_length = 320.0
+title_scroll = "on_hover"
+
+[widget.weather]
+type = "weather"
+color = "tertiary"
+
+[widget.clock]
+type = "clock"
+color = "on_primary"
+capsule = true
+capsule_fill = "primary"
+format = "{:%a, %d %b  ·  %H:%M}"
+
+[widget.media]
+type = "media"
+color = "tertiary"
+hide_when_no_media = true
+title_scroll = "on_hover"
+art_size = 16.0
+min_length = 80.0
+max_length = 240.0
+
+[widget.sys_cpu]
+type = "sysmon"
+stat = "cpu_usage"
+glyph = "cpu-2"
+
+[widget.sys_temp]
+type = "sysmon"
+stat = "cpu_temp"
+show_value = true
+
+[widget.sys_gpu]
+type = "sysmon"
+stat = "gpu_temp"
+glyph = "gpu-usage"
+show_value = true
+
+[widget.sys_ram]
+type = "sysmon"
+stat = "ram_used"
+
+[widget.sys_disk]
+type = "sysmon"
+stat = "disk_used_pct"
+
+[widget.tray]
+type = "tray"
+capsule = true
+capsule_fill = "surface_variant"
+
+[widget.notifications]
+type = "notifications"
+color = "primary"
+
+[widget.network]
+type = "network"
+color = "tertiary"
+
+[widget.volume]
+type = "volume"
+color = "secondary"
+
+[widget.session]
+type = "session"
+color = "error"
+
+# ── Док ──────────────────────────────────────────────────────
+[dock]
+enabled = true
+position = "bottom"
+# автоскрытие: на 21:9 не отъедаем высоту
+auto_hide = true
+smart_auto_hide = true
+reserve_space = false
+icon_size = 44
+item_spacing = 8
+main_axis_padding = 14
+cross_axis_padding = 8
+magnification = true
+magnification_scale = 1.45
+background_opacity = 0.90
+radius = 18
+shadow = true
+show_running = true
+show_dots = true
+launcher_position = "none"
+pinned = [
+  "firefox",
+  "kitty",
+  "code-oss",
+  "org.kde.dolphin",
+  "org.telegram.desktop",
+  "discord",
+  "obsidian",
+  "steam",
+]
+
+# ── Тема ─────────────────────────────────────────────────────
+[theme]
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "vibrant"
+custom_palette = "CachyGreen"   # запасная фиксированная палитра CachyOS
+pure_black_dark = false
+
+    [theme.templates]
+    enable_builtin_templates = true
+    enable_community_templates = true
+    community_ids = [ "neovim", "vscode", "obsidian", "opencode", "micro", "bat", "fastfetch", "telegram" ]
+    # hyprland добавлен: бордеры окон следуют палитре
+    builtin_ids = [ "btop", "gtk3", "gtk4", "kcolorscheme", "kitty", "qt", "alacritty", "hyprland" ]
+
+# ── Обои ─────────────────────────────────────────────────────
+[wallpaper]
+enabled = true
+fill_mode = "crop"
+transition = [ "fade" ]
+transition_duration = 1200.0
+transition_on_startup = true
+directory = "__WALLPAPERS__"
+
+# ── Экран блокировки ─────────────────────────────────────────
+[lockscreen]
+enabled = true
+blurred_desktop = true
+blur_intensity = 0.60
+tint_intensity = 0.35
+lock_before_suspend = true
+fingerprint = true
+
+# ── Простой / энергосбережение ───────────────────────────────
+[idle]
+
+    # гасим монитор через 20 минут; авто-блокировку не включаю
+    [idle.behavior.screen-off]
+    enabled = true
+    timeout = 1200.0
+
+# ── Уведомления ──────────────────────────────────────────────
+[notification]
+enable_daemon = true
+position = "top_right"
+background_opacity = 0.94
+border = true
+scale = 1.0
+offset_x = 16
+offset_y = 12
+max_visible = 4
+history_retention_hours = 24
+show_app_name = true
+show_actions = true
+
+# ── Затемнение фона под панелями ─────────────────────────────
+[backdrop]
+enabled = true
+blur_intensity = 0.45
+tint_intensity = 0.35
+
+# ── Оболочка ─────────────────────────────────────────────────
+[shell]
+font_family = "Adwaita Sans"
+polkit_agent = true
+launch_apps_as_systemd_services = true
+settings_show_advanced = true
+card_borders = true
+button_borders = true
+popup_shadows = true
+clipboard_enabled = true
+clipboard_image_action_command = "satty -f -"
+
+    [shell.animation]
+    enabled = true
+    speed = 1.0
+
+    # скруглённые углы экрана
+    [shell.screen_corners]
+    enabled = true
+    size = 24
+
+    [shell.launcher]
+    categories = true
+    show_icons = true
+    sort_by_usage = true
+    app_grid = false
+
+    [shell.panel]
+    borders = true
+    shadow = true
+    open_near_click_control_center = true
+    launcher_placement = "floating"
+    launcher_position = "center"
+    session_placement = "floating"
+    session_position = "center"
+
+    [shell.screenshot]
+    pipe_to_command = true
+    pipe_command = "satty -f -"
+    copy_to_clipboard = false
+    save_to_file = false
+
+# ── Системный монитор ────────────────────────────────────────
+[system.monitor]
+enabled = true
+gpu_poll_seconds = 2
+cpu_poll_seconds = 2
+memory_poll_seconds = 2
+
+# ── Хуки ─────────────────────────────────────────────────────
+[hooks]
+# при смене палитры подтягиваем RGB-подсветку клавиатуры/мыши/материнки
+colors_changed = [ "__HOME__/.local/bin/noctalia-rgb-sync" ]
+
+[location]
+auto_locate = true
+
+[control_center]
+# 700 по умолчанию мало: русские подписи кнопок не влезают
+width = 880
+show_shortcut_labels = true
+show_session_button = true
+
+# ── Календарь, ночной режим, виджеты локскрина ───────────────
+[calendar]
+enabled = true
+refresh_minutes = 15
+
+[nightlight]
+enabled = false
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+
+# ── Виджеты на рабочем столе ─────────────────────────────────
+# Слева, где на обоях пусто; фигура на большинстве картинок справа.
+[desktop_widgets]
+enabled = true
+schema_version = 2
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = false
+
+    [desktop_widgets.widget."desktop-clock@DP-2"]
+    type = "clock"
+    enabled = true
+    output = "DP-2"
+    cx = 620.0
+    cy = 430.0
+    box_width = 560.0
+    box_height = 210.0
+    placement_width = 3440.0
+    placement_height = 1440.0
+    rotation = 0.0
+
+    [desktop_widgets.widget."desktop-weather@DP-2"]
+    type = "weather"
+    enabled = true
+    output = "DP-2"
+    cx = 620.0
+    cy = 660.0
+    box_width = 560.0
+    box_height = 170.0
+    placement_width = 3440.0
+    placement_height = 1440.0
+    rotation = 0.0
