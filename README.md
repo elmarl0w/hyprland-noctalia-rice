@@ -142,6 +142,46 @@ rm ~/.config/rgb-sync.off      # включить
 
 Лог: `/tmp/rgb-sync.log`.
 
+## Экран входа
+
+`noctalia-greeter` показывает те же обои и палитру, что и рабочий стол. Он
+работает через **greetd** и заменяет собой SDDM или другой дисплей-менеджер.
+
+```bash
+sudo pacman -S --needed greetd noctalia-greeter
+# конфиг печатает сам пакет — не сочиняй его руками:
+noctalia-greeter-print-greetd-config
+```
+
+Конфиг из `greetd/config.toml` в этом репозитории совпадает с тем, что выдаёт
+генератор. Переключение:
+
+```bash
+sudo systemctl disable sddm
+sudo systemctl enable greetd
+reboot
+```
+
+**Держи откат под рукой.** Если greetd не стартует, графического входа не будет
+вовсе — только TTY:
+
+```bash
+# Ctrl+Alt+F2, войти как root
+systemctl disable --now greetd
+systemctl enable --now sddm
+reboot
+```
+
+Бинарь сессии называется `noctalia-greeter-session`, а не `noctalia-greeter` —
+на этом легко споткнуться. Пользователю `greeter` нужен доступ к
+`/var/lib/noctalia-greeter` (режим `750`, владелец `greeter:greeter`), а его
+домашним каталогом должен быть тот же путь.
+
+Внешний вид задаётся декларативно в `/var/lib/noctalia-greeter/greeter.toml` —
+эти ключи имеют приоритет над синхронизацией и не перетираются ею. В
+`5.0.0_beta.9` команда `noctalia msg greeter-sync` присутствует в справке, но
+рабочим экземпляром не принимается, так что декларативный путь надёжнее.
+
 ## Обои
 
 В репозитории их **нет** — это чужие работы. Взять можно:
