@@ -257,7 +257,10 @@ clipboard_enabled = true
 clipboard_image_action_command = "satty -f -"
 
     [shell.greeter_sync]
-    auto_sync = true
+    # true заставляет noctalia-greeter-apply-appearance подниматься через run0
+    # при каждой смене палитры — polkit просит пароль. Внешний вид гритера
+    # задан декларативно в /var/lib/noctalia-greeter/greeter.toml, он в приоритете.
+    auto_sync = false
 
     [shell.animation]
     enabled = true
