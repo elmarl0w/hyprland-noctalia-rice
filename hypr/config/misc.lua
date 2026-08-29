@@ -9,7 +9,10 @@ hl.config({
         middle_click_paste = false,
         enable_swallow = true,
         swallow_regex = "(kitty|ghostty|[Kk]onsole|Alacritty|gnome-terminal|xfce[0-9]?-terminal)",
-        vrr = 3,
+        -- 2 = адаптивная синхронизация в любом полноэкранном приложении.
+        -- Режим 3 требовал от игры метки «игровой контент», которую под
+        -- Proton ставят далеко не все, поэтому VRR почти не включался.
+        vrr = 2,
     },
     xwayland = {
         force_zero_scaling = true
