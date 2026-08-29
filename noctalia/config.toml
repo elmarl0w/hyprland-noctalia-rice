@@ -299,10 +299,6 @@ gpu_poll_seconds = 2
 cpu_poll_seconds = 2
 memory_poll_seconds = 2
 
-# ── Хуки ─────────────────────────────────────────────────────
-[hooks]
-# при смене палитры подтягиваем RGB-подсветку клавиатуры/мыши/материнки
-colors_changed = [ "__HOME__/.local/bin/noctalia-rgb-sync" ]
 
 [location]
 # автоопределение по IP выдавало город VPN-выхода, а не реальный

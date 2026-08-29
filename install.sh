@@ -44,21 +44,6 @@ cp -a "$SRC/nvim/init.lua" "$CFG/nvim/"
 cp -a "$SRC/nvim/colors/." "$CFG/nvim/colors/"
 cp -a "$SRC/nvim/lua/plugins/." "$CFG/nvim/lua/plugins/"
 
-c "скрипт синхронизации RGB"
-mkdir -p "$HOME/.local/bin"
-cp -a "$SRC/bin/noctalia-rgb-sync" "$HOME/.local/bin/"
-chmod +x "$HOME/.local/bin/noctalia-rgb-sync"
-
-c "сервис OpenRGB"
-mkdir -p "$CFG/systemd/user"
-cp -a "$SRC/systemd/openrgb.service" "$CFG/systemd/user/"
-if command -v openrgb >/dev/null 2>&1; then
-  systemctl --user daemon-reload
-  systemctl --user enable --now openrgb.service || warn "не удалось запустить openrgb.service"
-else
-  warn "openrgb не установлен — сервис не включён"
-fi
-
 c "применяем"
 if command -v noctalia >/dev/null 2>&1; then
   noctalia config validate "$CFG/noctalia/config.toml" || warn "конфиг Noctalia не прошёл валидацию"

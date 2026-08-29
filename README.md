@@ -1,10 +1,10 @@
 # Hyprland + Noctalia rice
 
 Конфигурация рабочего стола на **Hyprland** с шеллом **Noctalia**, где палитра всей
-системы генерируется из обоев и разъезжается по терминалу, редактору, GTK/Qt,
-бордерам окон и RGB-подсветке железа.
+системы генерируется из обоев и разъезжается по терминалу, редактору, GTK/Qt
+и бордерам окон.
 
-Сменил обои — перекрасилось всё, включая клавиатуру.
+Сменил обои — перекрасилось всё.
 
 <!-- Скриншот: положи сюда своё изображение и раскомментируй
 ![screenshot](docs/screenshot.png)
@@ -19,8 +19,6 @@
 | Фиксированная палитра CachyOS | `noctalia/palettes/CachyGreen.json` |
 | kitty | `kitty/kitty.conf` |
 | Neovim с нуля | `nvim/` |
-| Синхронизация RGB-железа | `bin/noctalia-rgb-sync` |
-| Сервис OpenRGB | `systemd/openrgb.service` |
 
 ## Требования
 
@@ -31,12 +29,7 @@ Hyprland. Конфиг Hyprland здесь в **Lua-формате**, а не `h
 # обязательное
 sudo pacman -S --needed noctalia hyprland kitty neovim
 
-# RGB-подсветка (опционально)
-sudo pacman -S --needed openrazer-driver-dkms openrazer-daemon python-openrazer openrgb
-sudo gpasswd -a "$USER" openrazer   # группа называется openrazer, НЕ plugdev
 ```
-
-После установки openrazer нужна перезагрузка — собирается модуль ядра.
 
 ## Установка
 
@@ -123,26 +116,6 @@ community_ids = [ "neovim", "vscode", "obsidian", "opencode", "micro", "bat", "f
 | `Super + Tab` | переключатель окон |
 | `Super + Space` | сменить раскладку |
 | `Print` | скриншот области |
-
-## RGB-подсветка
-
-`bin/noctalia-rgb-sync` вешается на хук `colors_changed` и красит железо в акцент
-палитры. Работает через сервер OpenRGB — он видит клавиатуру, материнку,
-видеокарту и модули памяти разом.
-
-**Почему именно сервер.** Прямой вызов `openrgb --mode direct --color X` сканирует
-шину i2c и занимает под минуту — в хуке он молча не успевает. Сервер держит
-устройства открытыми, запрос отрабатывает за ~1 секунду. Поэтому `openrgb.service`
-и включается автозапуском.
-
-Ручное управление — GUI командой `openrgb`. Чтобы свой цвет не затирался:
-
-```bash
-touch ~/.config/rgb-sync.off   # выключить синхронизацию
-rm ~/.config/rgb-sync.off      # включить
-```
-
-Лог: `/tmp/rgb-sync.log`.
 
 ## Экран входа
 
@@ -256,10 +229,3 @@ enum'ов — их видно только глазами после приме�
 `[appearance.wallpaper] path`, синхронизация его не перебьёт — декларативные ключи
 там в приоритете. Убери блок и обнови через `noctalia msg greeter-sync`.
 
-**OpenRazer на Arch.** Группа называется `openrazer`, а не `plugdev` из
-апстримной инструкции. Демон активируется по D-Bus при первом обращении, а
-членство в группе вступает в силу только после перелогина — до перезагрузки
-подсветка молча не работает.
-
-**OpenRGB и Razer.** Сам по себе OpenRGB устройства Razer на Linux не видит —
-он ходит к ним через демон OpenRazer. Нужны оба пакета.
