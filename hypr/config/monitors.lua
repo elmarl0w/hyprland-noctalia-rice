@@ -16,4 +16,6 @@ hl.monitor({
     mode      = "highrr",
     position  = "auto",
     scale     = "auto",
+    -- 10 бит на канал: меньше полос на градиентах, панель это заявляет в EDID
+    bitdepth  = 10,
 })
