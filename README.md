@@ -115,7 +115,7 @@ community_ids = [ "neovim", "vscode", "obsidian", "opencode", "micro", "bat", "f
 | `Super + L` | заблокировать экран |
 | `Super + Tab` | переключатель окон |
 | `Super + Space` | сменить раскладку |
-| `Print` | скриншот области |
+| `Print` / `Alt + Shift + 4` | скриншот области |
 
 ## Экран входа
 
