@@ -94,7 +94,7 @@ hl.bind(mainMod .. " + " .. opt .. " + Left",  hl.dsp.focus({ monitor = "-1" }))
 hl.bind(mainMod .. " + E",         hl.dsp.exec_cmd(launchPrefix .. FILE_MANAGER))
 hl.bind(mainMod .. " + W",         hl.dsp.exec_cmd(launchPrefix .. BROWSER))
 hl.bind(mainMod .. " + T",         hl.dsp.exec_cmd(launchPrefix .. EDITOR))
-hl.bind(mainMod .. " + C",         hl.dsp.exec_cmd(launchPrefix .. CALCULATOR))
+-- ⌃C отдан терминалу под сигнал прерывания; калькулятор — через лаунчер
 hl.bind(mainMod .. " + V",         hl.dsp.exec_cmd(noctCall .. "panel-toggle clipboard"))
 hl.bind(mainMod .. " + A",         hl.dsp.exec_cmd(noctCall .. "panel-toggle control-center notifications"))
 hl.bind(mainMod .. " + X",         hl.dsp.exec_cmd(noctCall .. "panel-toggle control-center"))
