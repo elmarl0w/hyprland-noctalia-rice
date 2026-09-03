@@ -24,7 +24,7 @@ hl.bind(cmd .. " + Space",          hl.dsp.exec_cmd(noctCall .. "panel-toggle la
 hl.bind(cmd .. " + Tab",            hl.dsp.exec_cmd(noctCall .. "window-switcher"))
 hl.bind(cmd .. " + Q",              hl.dsp.window.close())
 hl.bind(cmd .. " + comma",          hl.dsp.exec_cmd(noctCall .. "settings-toggle"))
-hl.bind(cmd .. " + Return",         hl.dsp.exec_cmd(launchPrefix .. TERMINAL))
+hl.bind(mainMod .. " + " .. cmd .. " + T", hl.dsp.exec_cmd(launchPrefix .. TERMINAL))
 hl.bind(cmd .. " + " .. opt .. " + Escape", hl.dsp.exec_cmd("hyprctl kill"))
 hl.bind(mainMod .. " + " .. cmd .. " + Q",  hl.dsp.exec_cmd(noctCall .. "session lock"))
 
