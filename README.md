@@ -105,18 +105,17 @@ community_ids = [ "neovim", "vscode", "obsidian", "opencode", "micro", "bat", "f
 
 ## Горячие клавиши
 
-Раскладка воспроизводит macOS: `⌘` под большим пальцем для приложений,
-`⌃` под мизинцем для системы. Достигается поворотом трёх модификаторов
-в `keyd/default.conf`.
-
-Полная таблица — в **[SHORTCUTS.md](SHORTCUTS.md)**.
-
-```bash
-sudo pacman -S --needed keyd
-sudo install -Dm644 keyd/default.conf /etc/keyd/default.conf
-sudo systemctl enable --now keyd
-```
-
+| | |
+|---|---|
+| `Super + Shift + W` | панель обоев |
+| `Alt + Space` | лаунчер |
+| `Super + Return` / `Ctrl + Alt + T` | терминал |
+| `Super + X` | центр управления |
+| `Super + Z` | настройки Noctalia |
+| `Super + L` | заблокировать экран |
+| `Super + Tab` | переключатель окон |
+| `Super + Space` | сменить раскладку |
+| `Print` / `Alt + Shift + 4` | скриншот области |
 
 ## Экран входа
 
